@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './viewProfile.css';
 
 // import { SignupForm } from './login';
 
@@ -21,7 +23,7 @@ export default function ViewProfile () {
         <img style={{borderRaduis:'50%'}} clasName='w-32' src={currentUser.avatar} />
       </div>
       <div className='flex gap-10 w-32 mx-auto'>
-        <button type="submit" className='bg-gray-300 px-4 py-2 rounded-md cursor-pointer'><a href="/component/edit-profile">edit</a></button>
+        <button type="submit" className='bg-gray-300 px-4 py-2 rounded-md cursor-pointer'><Link to="/edit-profile">Edit</Link></button>
         
         <form
           method="post"

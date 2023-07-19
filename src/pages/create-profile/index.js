@@ -3,29 +3,25 @@ import ReactDOM from 'react-dom';
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import './createProfile.css';
+
+
 
 const MyTextInput = ({ label, ...props }) => {
-  // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-  // which we can spread on <input>. We can use field meta to show an error
-  // message if the field is invalid and it has been touched (i.e. visited)
   const [field, meta] = useField(props);
   return (
     <>
       <label htmlFor={props.id || props.name}>{label}</label>
       <input className="text-input" {...field} {...props} />
       {meta.touched && meta.error ? (
-        <div className="bg-red-700">{meta.error}</div>
+        <div className="error">{meta.error}</div>
       ) : null}
     </>
   );
 };
-// split the component into multiple files and add a validationon each component
 
 const MyCheckbox = ({ children, ...props }) => {
-  // React treats radios and checkbox inputs differently other input types, select, and textarea.
-  // Formik does this too! When you specify `type` to useField(), it will
-  // return the correct bag of props for you -- a `checked` prop will be included
-  // in `field` alongside `name`, `value`, `onChange`, and `onBlur`
   const [field, meta] = useField({ ...props, type: 'checkbox' });
   return (
     <div>
@@ -40,22 +36,8 @@ const MyCheckbox = ({ children, ...props }) => {
   );
 };
 
-// const MySelect = ({ label, ...props }) => {
-//   const [field, meta] = useField(props);
-//   return (
-//     <div>
-//       <label htmlFor={props.id || props.name}>{label}</label>
-//       <select {...field} {...props} />
-//       {meta.touched && meta.error ? (
-//         <div className="error">{meta.error}</div>
-//       ) : null}
-//     </div>
-//   );
-// };
 
-// And now we can use these
 export default function SignupForm () {
-  // const [user, setUser] = useState(JSON.parse(localStorage.getItem('userData')))
   const { register, handleSubmit } = useForm();
   const mystyle = {
     border: "1px solid #000",
@@ -155,7 +137,7 @@ export default function SignupForm () {
             I accept the terms and conditions
           </MyCheckbox>
 
-          <button type="submit" onSubmit={handleSubmit} className='bg-green-300 rounded-md'><a href="/component/view-profile">Submit</a></button>
+          <button type="submit" onSubmit={handleSubmit} className='bg-green-300 rounded-md'><Link to="/view-profile">Submit</Link></button>
         </Form>
       </Formik>
     </>
